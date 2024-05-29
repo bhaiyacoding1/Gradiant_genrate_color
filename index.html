@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gradiant colour gen</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: linear-gradient(to right,
+                    #f3ad34,
+                    #7a26df);
+
+        }
+
+        section {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            /* row-gap: rem; */
+        }
+            .buttondiv {
+                margin-bottom: 3rem;
+            }
+
+            button {
+                outline: none;
+                border: none;
+                padding: 0.6rem 2rem;
+                font-size: 15px;
+                border-radius: 20px;
+                text-transform: uppercase;
+                margin: 0 20px 0 0;
+                cursor: pointer;
+            }
+
+            button:hover {
+                box-shadow: 0 5px 15px 0 black;
+            }
+
+            button:first-child {
+                background-color: navy;
+                color: white;
+                font-weight: 600;
+            }
+
+            button:last-child {
+                background-color: rgb(43, 77, 4);
+                color: white;
+                font-weight: 600;
+            }
+
+            .copypera {
+                font-size: 1.3rem;
+                text-transform: capitalize;
+                color: white;
+            }
+
+            .copydiv {
+                width: 25%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                line-height: 1.5;
+                background-color: rgba(211, 211, 211, 0.176);
+                padding: 10px 7px;
+                border-radius: 10px;
+                border-left: 3px solid rgb(255, 255, 255);
+                backdrop-filter: blur(20px);
+                color: white;
+                margin-top: 1rem;
+                cursor: pointer;
+            }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div class="buttondiv">
+            <button class="btn1">#f3ad34</button>
+            <button class="btn2">#7a26df</button>
+        </div>
+        <p class="copypera">copy this code</p>
+        <div class="copydiv">
+            background-image: linear-gradient(
+            to top right,#f3ad34,#7a26df
+            );
+        </div>
+    </section>
+    <script>
+        let btn1 = document.querySelector(".btn1");
+        let btn2 = document.querySelector(".btn2");
+        let copydiv = document.querySelector(".copydiv")
+        let rgb1 = "#f3ad34";
+        let rgb2 = "#7a26df";
+
+        const hextcolour = () => {
+            let hexa = "0123456789abcdef";
+            let color = "#"
+            for (let i = 0; i < 6; i++) {
+                color = color + hexa[Math.floor(Math.random() * 16)]
+            }
+            return(color);
+        }
+        const btn1colour = () => {
+            rgb1 = hextcolour()
+            console.log(rgb1);
+            document.body.style.backgroundImage = `linear-gradient(to top right,${rgb1},${rgb2})`;
+             copydiv.innerHTML =  `background-image: linear-gradient(to top right,${rgb1},${rgb2})`;   
+            btn1.innerHTML = `${rgb1}`; 
+        }
+        const btn2colour = () => {
+            rgb2 = hextcolour()
+            document.body.style.backgroundImage = `linear-gradient(to right, ${rgb1}, ${rgb2})`;
+            copydiv.innerHTML =  `background-image: linear-gradient(to right,${rgb1},${rgb2})`;  
+            btn1.innerHTML = `${rgb1}`; 
+        }
+
+        btn1.addEventListener("click", btn1colour)
+        btn2.addEventListener("click", btn2colour)
+
+        copydiv.addEventListener("click", () =>{
+            navigator.clipboard.writeText(copydiv.innerHTML);
+            alert("Your text is Copy")
+        })
+    </script>
+</body>
+
+</html>
